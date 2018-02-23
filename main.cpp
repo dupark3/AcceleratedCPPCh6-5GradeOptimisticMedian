@@ -4,8 +4,8 @@ Write an analysis function to call optimistic_median
 */
 
 #include <algorithm> // stable_partition
-#include <iomanip> // precision, setw
-#include <ios> // width
+#include <iomanip> // precision
+// #include <ios> // width
 #include <iostream>
 #include <list>
 #include <stdexcept>
@@ -35,7 +35,7 @@ int main(){
     // Compare predicate uses "name" of student data, as defined in Student_info.cpp
     students.sort(compare);
 
-    // Extract students who failed and store in new container
+    // Extract students who failed and store in new container. Maintain alphabetical sort of names using "stable".
     iter seperator = stable_partition(students.begin(), students.end(), passingGrade);
     container failStudents(seperator, students.end());
     students.erase(seperator, students.end());
@@ -53,7 +53,7 @@ int main(){
                   << std::endl;
     }
 
-    std::cout << std::endl << "FAILING STUDENTS (under 60):" << std::endl;
+    std::cout << std::endl << "FAILING STUDENTS (under 65):" << std::endl;
     for (iter i = failStudents.begin(); i!= failStudents.end(); ++i){
         // Print name then appropriate spaces (COULD USE WIDTH AND SETW??)
         std::cout << i->name
