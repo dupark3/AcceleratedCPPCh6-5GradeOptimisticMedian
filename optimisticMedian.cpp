@@ -16,7 +16,7 @@ double optimisticMedian (const std::vector<double>& vec){
     vec_sz middle = homeworkDone / 2;
 
     // if no homework done, return 0 for homework grade
-    if (homeworkDone == 0)
+    if (nonzero.empty())
         return 0;
     // some homework done: if even, take average of middle two values, if odd, take middle value
     else
