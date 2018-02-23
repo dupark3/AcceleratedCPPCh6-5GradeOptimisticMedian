@@ -19,8 +19,9 @@ Stable partition students who did and did not do all homework, just like extract
 #include <string>
 
 #include "analysis.h"
+#include "didAllHw.h"
 #include "grade.h"
-#include "passingGrade.h"
+// #include "passingGrade.h"
 #include "Student_info.h"
 
 

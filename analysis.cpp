@@ -3,6 +3,8 @@
 #include <iterator>
 #include <list>
 
+#include "analysis.h"
+#include "grade.h"
 #include "Student_info.h"
 
 void write_analysis(std::ostream& out,
@@ -22,8 +24,8 @@ void write_analysis(std::ostream& out,
     "Students who did not do all HW (Average of HW):                            " << analysis(didNotHw, grade_average) << std::endl <<
 }
 
-double analysis (const std::list<Student_info>& students, double calculateGrade(const std::vector<double>&)){
+double analysis (const std::list<Student_info>& students, double calculateGrade(const Student_info&)){
     std::list<double> grades;
-    transform(students.begin(), students.end(), back_inserter(grades), calculateGrade);
+    transform(students.begin(), students.end(), back_inserter(grades), grade_optimistic_median;
     return median(grades);
 }

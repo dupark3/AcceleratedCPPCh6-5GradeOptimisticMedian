@@ -3,7 +3,7 @@
 
 #include <vector>
 
-double median(const std::vector<double>&);
+double median(std::vector<double>);
 
 #endif // GUARD_median_h
 
