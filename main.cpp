@@ -18,6 +18,7 @@ Stable partition students who did and did not do all homework, just like extract
 #include <stdexcept>
 #include <string>
 
+#include "analysis.h"
 #include "grade.h"
 #include "passingGrade.h"
 #include "Student_info.h"
@@ -47,22 +48,22 @@ int main(){
     container studentsDidHw(students.begin(), didOrDidnt);
     container studentsDidNotHw(didOrDidnt, students.end());
 
+    /* This is for if we want to separate fail/pass
     // Extract fails from DID group of students
     iter seperatorDid = stable_partition(studentsDidHw.begin(), studentsDidHw.end(), passingGrade);
-    container failStudentsDidHw(seperator, studentsDidHw.end());
+    container failStudentsDidHw(seperatorDid, studentsDidHw.end());
     studentsDidHw.erase(seperatorDid, studentsDidHw.end());
 
     // Extract fails from the DID NOT group of students
     iter separatorDidnt = stable_partition(studentsDidNotHw.begin(), studentsDidNotHw.end(), passingGrade);
     container failStudentsDidNotHw(separatorDidnt, studentsDidNotHw.end());
     studentsDidNotHw.erase(separatorDidnt,studentsDidNotHw.end());
+    */
 
-    // At this point, we have FOUR containers:
-    // 1. studentsDidHw = those who did all HW and passed
-    // 2. studentsDidNotHw = those who did not do all HW but passed
-    // 3. failStudentsDidHw = those who did all HW but failed
-    // 4. failStudentsDidNotHw = those who did not do all HW and failed
+    write_analysis(std::cout, studentsDidHw, studentsDidNotHw);
 
+    // This is for printing with Student_info struct that contains finalGrade, which is calculated AS the input is read
+    /*
     // Print passing students in original container
     std::cout << "PASSING STUDENTS:" << std::endl;
     for (iter i = students.begin(); i!= students.end(); ++i){
@@ -87,5 +88,6 @@ int main(){
                   << std::setprecision(prec)
                   << std::endl;
     }
+    */
     return 0;
 }

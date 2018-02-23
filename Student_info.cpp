@@ -12,18 +12,15 @@ bool compare(const Student_info& x, const Student_info& y){
 
 std::istream& read(std::istream& is, Student_info& s){
     if (is){
-        double midterm, final;
-        std::vector<double> homework;
+        is >> s.name >> s.midterm >> s.final;
+        read_hw(is, s.homework);
 
-        is >> s.name >> midterm >> final;
-        read_hw(is, homework);
-        s.homework = homework;
-
+        /* This try/catch is for grading as we read
         try {
-            s.finalGrade = grade(midterm, final, homework);
+            s.finalGrade = grade(s.midterm, s.final, homework);
         } catch (std::domain_error e){
             s.finalGrade = -1;
-        }
+        } */
 
     }
     return is;
