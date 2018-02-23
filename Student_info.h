@@ -8,7 +8,7 @@
 
 struct Student_info{
     std::string name;
-    double final_grade;
+    double finalGrade;
 };
 
 bool compare(const Student_info&, const Student_info&);

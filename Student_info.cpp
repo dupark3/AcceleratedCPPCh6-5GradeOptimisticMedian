@@ -19,9 +19,9 @@ std::istream& read(std::istream& is, Student_info& s){
         read_hw(is, homework);
 
         try {
-            s.final_grade = grade(midterm, final, homework);
+            s.finalGrade = grade(midterm, final, homework);
         } catch (std::domain_error e){
-            s.final_grade = -1;
+            s.finalGrade = -1;
         }
 
     }
