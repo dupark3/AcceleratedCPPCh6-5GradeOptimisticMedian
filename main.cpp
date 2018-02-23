@@ -1,11 +1,18 @@
 /*
-Accelerated C++ Exercise 6-5
+Accelerated C++
+
+Exercise 6-5
 Write an analysis function to call optimistic_median
+
+Exercise 6-6
+Merge analysis of median, average, and optimistic median into one function
+
+Exercise 6-7
+Stable partition students who did and did not do all homework, just like extract_fails
 */
 
 #include <algorithm> // stable_partition
 #include <iomanip> // precision
-// #include <ios> // width
 #include <iostream>
 #include <list>
 #include <stdexcept>
@@ -20,7 +27,7 @@ typedef std::list<Student_info> container;
 typedef std::list<Student_info>::iterator iter;
 
 int main(){
-    container students; // Uses List to contain student records for optimized insertion/deletion
+    container students;
     Student_info record; // Student info struct contains data string "name" and grade double "finalGrade"
 
     std::cout << "Enter student name, midterm, final, and all homework grades below." << std::endl;
@@ -35,10 +42,26 @@ int main(){
     // Compare predicate uses "name" of student data, as defined in Student_info.cpp
     students.sort(compare);
 
-    // Extract students who failed and store in new container. Maintain alphabetical sort of names using "stable".
-    iter seperator = stable_partition(students.begin(), students.end(), passingGrade);
-    container failStudents(seperator, students.end());
-    students.erase(seperator, students.end());
+    // Separate students who did and didn't do all homework
+    iter didOrDidnt = stable_partition(students.begin(), students.end(), didAllHw);
+    container studentsDidHw(students.begin(), didOrDidnt);
+    container studentsDidNotHw(didOrDidnt, students.end());
+
+    // Extract fails from DID group of students
+    iter seperatorDid = stable_partition(studentsDidHw.begin(), studentsDidHw.end(), passingGrade);
+    container failStudentsDidHw(seperator, studentsDidHw.end());
+    studentsDidHw.erase(seperatorDid, studentsDidHw.end());
+
+    // Extract fails from the DID NOT group of students
+    iter separatorDidnt = stable_partition(studentsDidNotHw.begin(), studentsDidNotHw.end(), passingGrade);
+    container failStudentsDidNotHw(separatorDidnt, studentsDidNotHw.end());
+    studentsDidNotHw.erase(separatorDidnt,studentsDidNotHw.end());
+
+    // At this point, we have FOUR containers:
+    // 1. studentsDidHw = those who did all HW and passed
+    // 2. studentsDidNotHw = those who did not do all HW but passed
+    // 3. failStudentsDidHw = those who did all HW but failed
+    // 4. failStudentsDidNotHw = those who did not do all HW and failed
 
     // Print passing students in original container
     std::cout << "PASSING STUDENTS:" << std::endl;

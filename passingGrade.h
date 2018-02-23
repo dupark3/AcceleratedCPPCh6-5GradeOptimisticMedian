@@ -3,7 +3,7 @@
 
 #include "Student_info.h"
 
-bool passingGrade(Student_info);
+bool passingGrade(const Student_info&);
 
 #endif // GUARD_passingGrade_h
 

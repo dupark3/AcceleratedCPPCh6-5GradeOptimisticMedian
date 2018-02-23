@@ -17,6 +17,7 @@ std::istream& read(std::istream& is, Student_info& s){
 
         is >> s.name >> midterm >> final;
         read_hw(is, homework);
+        s.homework = homework;
 
         try {
             s.finalGrade = grade(midterm, final, homework);

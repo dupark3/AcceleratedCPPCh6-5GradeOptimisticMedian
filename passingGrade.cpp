@@ -1,5 +1,5 @@
 #include "Student_info.h"
 
-bool passingGrade(Student_info student){
+bool passingGrade(const Student_info& student){
     return student.finalGrade > 65;
 }
