@@ -17,7 +17,7 @@ Write an analysis function to call optimistic_median
 #include "Student_info.h"
 
 typedef std::list<Student_info> container;
-typedef std::list<Student_info>::iterator container_size;
+typedef std::list<Student_info>::iterator iter;
 
 int main(){
     // Uses List to contain student records for optimized insertion/deletion
@@ -37,19 +37,9 @@ int main(){
     students.sort(compare);
 
     // Extract students who failed and store in container
-    container fails;
-    container_size i = students.begin();
-    container_size countPassing = 0;
-    while (i != students.end()){
-        if (extract_fail(i->finalGrade)){
-            fails.push_back(*i);
-            ++i;
-        } else {
-            students.push_front(*i);
-            ++i;
-            ++countPassing;
-        }
-    }
+    iter seperator = stable_partition(students.begin(), students.end(), passingGrade);
+    container failStudents(separator, students.end());
+    students.erase(separator, students.end());
 
     // Resize the original vector by how many passing students have been copied to the front of the vector
     students.resize(countPassing);
@@ -57,7 +47,7 @@ int main(){
 
     // Print passing students in original container (fails have been extracted)
     std::cout << "PASSING STUDENTS:" << std::endl;
-    for (container_size i = students.begin(); i!= students.end(); ++i){
+    for (iter i = students.begin(); i!= students.end(); ++i){
         // Print name then appropriate spaces (COULD USE WIDTH AND SETW??)
         std::cout << i->name
                   << std::string(maxlen + 1 - (i->name).size(), ' ');
@@ -70,7 +60,7 @@ int main(){
     }
 
     std::cout << std::endl << "FAILING STUDENTS (under 60):" << std::endl;
-    for (container_size i = fails.begin(); i!= fails.end(); ++i){
+    for (iter i = fails.begin(); i!= fails.end(); ++i){
         // Print name then appropriate spaces (COULD USE WIDTH AND SETW??)
         std::cout << i->name
                   << std::string(maxlen + 1 - (i->name).size(), ' ');
