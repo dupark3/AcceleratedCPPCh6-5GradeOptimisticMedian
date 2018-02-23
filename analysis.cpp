@@ -5,6 +5,7 @@
 
 #include "analysis.h"
 #include "grade.h"
+#include "median.h"
 #include "Student_info.h"
 
 void write_analysis(std::ostream& out,
@@ -21,11 +22,11 @@ void write_analysis(std::ostream& out,
     "Students who did all HW (Optimistic Median of HW, ignoring zeroes:         " << analysis(didHw, grade_optimistic_median) << std::endl <<
     "Students who did not do all HW (Optimistic Median of HW, ignoring zeroes): " << analysis(didNotHw, grade_optimistic_median) << std::endl <<
     "Students who did all HW (Average of HW):                                   " << analysis(didHw, grade_average) << std::endl <<
-    "Students who did not do all HW (Average of HW):                            " << analysis(didNotHw, grade_average) << std::endl <<
+    "Students who did not do all HW (Average of HW):                            " << analysis(didNotHw, grade_average) << std::endl;
 }
 
 double analysis (const std::list<Student_info>& students, double calculateGrade(const Student_info&)){
-    std::list<double> grades;
-    transform(students.begin(), students.end(), back_inserter(grades), grade_optimistic_median;
+    std::vector<double> grades;
+    transform(students.begin(), students.end(), back_inserter(grades), grade_optimistic_median);
     return median(grades);
 }
