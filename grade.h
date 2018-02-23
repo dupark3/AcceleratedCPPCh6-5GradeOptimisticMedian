@@ -4,9 +4,11 @@
 #include <vector>
 #include "Student_info.h"
 
-double grade(double, double, double);
+double grade_optimistic_median(const Student_info&);
+double grade_median(const Student_info&);
+double grade_average(const Student_info&);
 double grade(double, double, const std::vector<double>&);
-// double grade(const Student_info&);
+double grade(double, double, double);
 
 #endif // GUARD_grade_h
 
